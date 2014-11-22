@@ -1,6 +1,7 @@
 package mesh.gui;
 
-import mesh.model.Generator;
+import mesh.model.Mesh;
+import mesh.model.TaskGenerator;
 import mesh.model.Task;
 
 import javax.swing.*;
@@ -23,14 +24,19 @@ public class Gui extends JFrame {
     private JFormattedTextField minTimeText;
     private JFormattedTextField minHeightText;
     private JFormattedTextField taskNumberText;
-    private int minH, maxH, minW, maxW, minT, maxT, taskNum;
+    private int minH, maxH, minW, maxW, minT, maxT, taskNum, meshWidth, meshHeight;
+    private Mesh mesh;
 
     private JButton generateButton;
     private JTextArea taskTextArea;
     private JScrollPane taskScrollPane;
+    private JFormattedTextField meshWidthText;
+    private JFormattedTextField meshHeightText;
+    private JButton clickMeButton;
 
     public Gui() {
-        super();
+        super("M*E*S*H");
+
         theme();
         setContentPane(rootPanel);
         setSize(new Dimension(960, 700));
@@ -43,21 +49,35 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVariables();
+                mesh = new Mesh(meshWidth, meshHeight);
                 taskTextArea.setText("");
                 if ((maxW < minW) || (maxH < minH) || (maxT < minT)) {
-                    System.out.println("Something wrong");
+                    taskTextArea.append("***ERROR***\n" +
+                            "MAX < MIN?\n" +
+                            "****************\n");
                     return;
                 } else {
                     System.out.println("minW: " + minW + " maxW: " + maxW + "\n" +
                                     "minH: " + minH + " maxH: " + maxH + "\n" +
                                     "minT: " + minT + " maxW: " + maxT + "\n" +
                                     "num: " + taskNum);
-                    Generator generator = new Generator(minW, minH, minT, maxW, maxH, maxT, taskNum);
+                    TaskGenerator generator = new TaskGenerator(minW, minH, minT, maxW, maxH, maxT, taskNum);
 
                     for (Task task : generator.gen()) {
                         taskTextArea.append(task.toString() + "\n");
                     }
                 }
+            }
+        });
+
+        clickMeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame ddframe = new JFrame("xxxxxxxxxx");
+                ddframe.setSize(new Dimension(300,300));
+                ddframe.setLocationRelativeTo(null);
+                ddframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                ddframe.setVisible(true);
             }
         });
     }
@@ -70,6 +90,9 @@ public class Gui extends JFrame {
         minT = new Integer(minTimeText.getText());
         maxT = new Integer(maxTimeText.getText());
         taskNum = new Integer(taskNumberText.getText());
+        meshWidth = new Integer(meshWidthText.getText());
+        meshHeight = new Integer(meshHeightText.getText());
+
 
     }
 
@@ -86,8 +109,13 @@ public class Gui extends JFrame {
         minHeightText = new JFormattedTextField(nf);
         maxHeightText = new JFormattedTextField(nf);
         taskNumberText = new JFormattedTextField(nf);
+        meshWidthText = new JFormattedTextField(nf);
+        meshHeightText = new JFormattedTextField(nf);
+
         taskTextArea = new JTextArea();
         taskTextArea.setEditable(false);
+
+        taskTextArea.setFont(new Font("Segoe", Font.PLAIN, 14));
 
     }
 

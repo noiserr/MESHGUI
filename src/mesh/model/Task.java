@@ -25,4 +25,20 @@ public class Task {
         someLine = String.format(format, id, width, height, time);
         return someLine;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getTime() {
+        return time;
+    }
 }

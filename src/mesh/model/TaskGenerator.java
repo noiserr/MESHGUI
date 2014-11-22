@@ -7,14 +7,15 @@ import java.util.Random;
 /**
  * Created by MM on 2014-11-22.
  */
-public class Generator {
+public class TaskGenerator {
     private int minW, minH, minT, maxW, maxH, maxT, taskNum;
+
     Random r;
     List taskList;
 
 
 
-    public Generator(int minW, int minH, int minT, int maxW, int maxH, int maxT, int taskNum) {
+    public TaskGenerator(int minW, int minH, int minT, int maxW, int maxH, int maxT, int taskNum) {
         taskList = new ArrayList<Task>();
 
         this.minW = minW;
@@ -43,3 +44,4 @@ public class Generator {
 //        }
     }
 }
+
