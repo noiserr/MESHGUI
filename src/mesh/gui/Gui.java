@@ -1,3 +1,8 @@
+package mesh.gui;
+
+import mesh.model.Generator;
+import mesh.model.Task;
+
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
@@ -21,11 +26,14 @@ public class Gui extends JFrame {
     private int minH, maxH, minW, maxW, minT, maxT, taskNum;
 
     private JButton generateButton;
+    private JTextArea taskTextArea;
+    private JScrollPane taskScrollPane;
 
     public Gui() {
         super();
+        theme();
         setContentPane(rootPanel);
-        setSize(new Dimension(960,700));
+        setSize(new Dimension(960, 700));
         //pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -35,24 +43,26 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVariables();
-                if((maxW < minW)||(maxH < minH)|| (maxT < minT)){
+                taskTextArea.setText("");
+                if ((maxW < minW) || (maxH < minH) || (maxT < minT)) {
                     System.out.println("Something wrong");
                     return;
-                }else{
-                    System.out.println("minW: " + minW  + " maxW: " + maxW + "\n" +
-                                    "minH: " + minH  + " maxH: " + maxH + "\n" +
-                                    "minT: " + minT  + " maxW: " + maxT + "\n" +
-                                    "num: " + taskNum
+                } else {
+                    System.out.println("minW: " + minW + " maxW: " + maxW + "\n" +
+                                    "minH: " + minH + " maxH: " + maxH + "\n" +
+                                    "minT: " + minT + " maxW: " + maxT + "\n" +
+                                    "num: " + taskNum);
+                    Generator generator = new Generator(minW, minH, minT, maxW, maxH, maxT, taskNum);
 
-                    );
+                    for (Task task : generator.gen()) {
+                        taskTextArea.append(task.toString() + "\n");
+                    }
                 }
-
-
             }
         });
     }
 
-    private void setVariables(){
+    private void setVariables() {
         minH = new Integer(minHeightText.getText());
         maxH = new Integer(maxHeightText.getText());
         minW = new Integer(minWidthText.getText());
@@ -76,5 +86,30 @@ public class Gui extends JFrame {
         minHeightText = new JFormattedTextField(nf);
         maxHeightText = new JFormattedTextField(nf);
         taskNumberText = new JFormattedTextField(nf);
+        taskTextArea = new JTextArea();
+        taskTextArea.setEditable(false);
+
+    }
+
+    public void theme() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            System.out.println(UIManager.getSystemLookAndFeelClassName());
+            SwingUtilities.updateComponentTreeUI(this);
+
+
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
