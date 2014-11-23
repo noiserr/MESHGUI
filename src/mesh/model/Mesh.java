@@ -25,9 +25,9 @@ public class Mesh {
         for (int i = 0; i < meshWidth; i++) {
             for (int j = 0; j < meshHeight; j++) {
                 grid[i][j]=0;
-                System.out.print(grid[i][j]+ " ");
+                //System.out.print(grid[i][j]+ " ");
             }
-            System.out.print("\n");
+            //System.out.print("\n");
         }
     }
 

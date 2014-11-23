@@ -1,15 +1,17 @@
 package mesh.gui;
 
+import mesh.comparators.AscendingTaskTimeComparator;
 import mesh.model.Mesh;
 import mesh.model.TaskGenerator;
 import mesh.model.Task;
+import mesh.comparators.DescendingTaskTimeComparator;
 
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by MM on 2014-11-22.
@@ -17,105 +19,79 @@ import java.text.NumberFormat;
 public class Gui extends JFrame {
 
     private JPanel rootPanel;
-    private JFormattedTextField minWidthText;
-    private JFormattedTextField maxWidthText;
-    private JFormattedTextField maxTimeText;
-    private JFormattedTextField maxHeightText;
-    private JFormattedTextField minTimeText;
-    private JFormattedTextField minHeightText;
-    private JFormattedTextField taskNumberText;
     private int minH, maxH, minW, maxW, minT, maxT, taskNum, meshWidth, meshHeight;
     private Mesh mesh;
 
     private JButton generateButton;
     private JTextArea taskTextArea;
     private JScrollPane taskScrollPane;
-    private JFormattedTextField meshWidthText;
-    private JFormattedTextField meshHeightText;
+
     private JButton clickMeButton;
+    private JSpinner gridWidthSpinner;
+    private JSpinner gridHeightSpinner;
+
+    private JSpinner maxTimeSpinner;
+    private JSpinner minTimeSpinner;
+    private JSpinner minHeightSpinner;
+    private JSpinner maxHeightSpinner;
+    private JSpinner minWidthSpinner;
+    private JSpinner maxWidthSpinner;
+    private JSpinner taskNumberSpinner;
+    private JButton ascendingButton;
+    private JButton descendingButton;
+    private JButton shuffleButton;
+
+    private List<Task> taskList;
 
     public Gui() {
         super("M*E*S*H");
 
-        theme();
+        //theme();
         setContentPane(rootPanel);
         setSize(new Dimension(960, 700));
-        //pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        ascendingButton.setEnabled(false);
+        descendingButton.setEnabled(false);
+        shuffleButton.setEnabled(false);
+        addActionListeners();
 
-        generateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVariables();
-                mesh = new Mesh(meshWidth, meshHeight);
-                taskTextArea.setText("");
-                if ((maxW < minW) || (maxH < minH) || (maxT < minT)) {
-                    taskTextArea.append("***ERROR***\n" +
-                            "MAX < MIN?\n" +
-                            "****************\n");
-                    return;
-                } else {
-                    System.out.println("minW: " + minW + " maxW: " + maxW + "\n" +
-                                    "minH: " + minH + " maxH: " + maxH + "\n" +
-                                    "minT: " + minT + " maxW: " + maxT + "\n" +
-                                    "num: " + taskNum);
-                    TaskGenerator generator = new TaskGenerator(minW, minH, minT, maxW, maxH, maxT, taskNum);
 
-                    for (Task task : generator.gen()) {
-                        taskTextArea.append(task.toString() + "\n");
-                    }
-                }
-            }
-        });
 
-        clickMeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFrame ddframe = new JFrame("xxxxxxxxxx");
-                ddframe.setSize(new Dimension(300,300));
-                ddframe.setLocationRelativeTo(null);
-                ddframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                ddframe.setVisible(true);
-            }
-        });
+
     }
 
     private void setVariables() {
-        minH = new Integer(minHeightText.getText());
-        maxH = new Integer(maxHeightText.getText());
-        minW = new Integer(minWidthText.getText());
-        maxW = new Integer(maxWidthText.getText());
-        minT = new Integer(minTimeText.getText());
-        maxT = new Integer(maxTimeText.getText());
-        taskNum = new Integer(taskNumberText.getText());
-        meshWidth = new Integer(meshWidthText.getText());
-        meshHeight = new Integer(meshHeightText.getText());
+        minH = (Integer) minHeightSpinner.getValue();
+        maxH = (Integer) maxHeightSpinner.getValue();
+        minW = (Integer) minWidthSpinner.getValue();
+        maxW = (Integer) maxWidthSpinner.getValue();
+        minT = (Integer) minTimeSpinner.getValue();
+        maxT = (Integer) maxTimeSpinner.getValue();
+        taskNum = (Integer) taskNumberSpinner.getValue();
+        meshWidth = (Integer) gridWidthSpinner.getValue();
+        meshHeight = (Integer) gridHeightSpinner.getValue();
 
 
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
-        NumberFormat f = NumberFormat.getNumberInstance();
-        f.setMaximumIntegerDigits(1000);
-        NumberFormatter nf = new NumberFormatter(f);
-        nf.setAllowsInvalid(true);
-        minWidthText = new JFormattedTextField(nf);
-        maxWidthText = new JFormattedTextField(nf);
-        maxTimeText = new JFormattedTextField(nf);
-        minTimeText = new JFormattedTextField(nf);
-        minHeightText = new JFormattedTextField(nf);
-        maxHeightText = new JFormattedTextField(nf);
-        taskNumberText = new JFormattedTextField(nf);
-        meshWidthText = new JFormattedTextField(nf);
-        meshHeightText = new JFormattedTextField(nf);
+
+
+        minTimeSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
+        maxTimeSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
+        minHeightSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
+        maxHeightSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
+        minWidthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
+        maxWidthSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
+        gridHeightSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
+        gridWidthSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
+        taskNumberSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
 
         taskTextArea = new JTextArea();
+        taskTextArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
         taskTextArea.setEditable(false);
-
-        taskTextArea.setFont(new Font("Segoe", Font.PLAIN, 14));
 
     }
 
@@ -140,4 +116,78 @@ public class Gui extends JFrame {
             e.printStackTrace();
         }
     }
+
+    public void addActionListeners(){
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVariables();
+                mesh = new Mesh(meshWidth, meshHeight);
+                taskTextArea.setText("");
+                if ((maxW < minW) || (maxH < minH) || (maxT < minT)) {
+                    taskTextArea.append("***ERROR***\n" +
+                            "MAX < MIN?\n" +
+                            "****************\n");
+                    return;
+                } else {
+
+                    ascendingButton.setEnabled(true);
+                    descendingButton.setEnabled(true);
+                    shuffleButton.setEnabled(true);
+
+                    TaskGenerator generator = new TaskGenerator(minW, minH, minT, maxW, maxH, maxT, taskNum);
+                    taskList = generator.gen();
+
+                    refreshTaskWindows();
+
+
+                }
+            }
+        });
+
+        clickMeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame ddframe = new JFrame("xxxxxxxxxx");
+                ddframe.setSize(new Dimension(300, 300));
+                ddframe.setLocationRelativeTo(null);
+                ddframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                ddframe.setVisible(true);
+            }
+        });
+
+        ascendingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Collections.sort(taskList, new AscendingTaskTimeComparator());
+                refreshTaskWindows();
+
+            }
+        });
+
+        descendingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Collections.sort(taskList, new DescendingTaskTimeComparator());
+                refreshTaskWindows();
+            }
+        });
+
+        shuffleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //long seed = System.nanoTime();
+                Collections.shuffle(taskList);
+                refreshTaskWindows();
+            }
+        });
+    }
+
+    public void refreshTaskWindows(){
+        taskTextArea.setText("");
+        for (Task task : taskList) {
+            taskTextArea.append(task.toString() + "\n");
+        }
+    }
 }
+

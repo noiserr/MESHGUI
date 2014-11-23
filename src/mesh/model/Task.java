@@ -8,6 +8,7 @@ public class Task {
     private int height;
     private int width;
     private int time;
+    private boolean placed = false;
 
     public Task(int id, int w, int h, int t) {
         this.id = id;
@@ -20,7 +21,8 @@ public class Task {
     public String toString() {
 
 
-        String format = "ID:%-3d [%-1dx%-1d] t=%-3d";
+        String format = "ID:%2d [%2dx%2d] t=%-3d";
+
         String someLine;
         someLine = String.format(format, id, width, height, time);
         return someLine;
@@ -40,5 +42,13 @@ public class Task {
 
     public int getTime() {
         return time;
+    }
+
+    public boolean isPlaced() {
+        return placed;
+    }
+
+    public void setPlaced(boolean placed) {
+        this.placed = placed;
     }
 }
