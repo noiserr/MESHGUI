@@ -12,9 +12,13 @@ public class Task {
 
     public Task(int id, int w, int h, int t) {
         this.id = id;
-        this.height = h;
-        this.width = w;
+        this.height = w;
+        this.width = h;
         this.time = t;
+    }
+
+    public void timeLapse(){
+        time--;
     }
 
     @Override

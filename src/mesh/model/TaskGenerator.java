@@ -17,7 +17,6 @@ public class TaskGenerator {
 
     public TaskGenerator(int minW, int minH, int minT, int maxW, int maxH, int maxT, int taskNum) {
         taskList = new ArrayList<Task>();
-
         this.minW = minW;
         this.minH = minH;
         this.minT = minT;

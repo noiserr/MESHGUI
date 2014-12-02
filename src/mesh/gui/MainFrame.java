@@ -7,13 +7,12 @@ import mesh.model.Mesh;
 import mesh.model.TaskGenerator;
 import mesh.model.Task;
 import mesh.comparators.DescendingTaskTimeComparator;
+import mesh.providers.MeshProvider;
+import mesh.providers.TaskListProvider;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
@@ -30,7 +29,6 @@ public class MainFrame extends JFrame {
     private JTextArea taskTextArea;
     private JScrollPane taskScrollPane;
 
-    private JButton clickMeButton;
     private JSpinner gridWidthSpinner;
     private JSpinner gridHeightSpinner;
 
@@ -67,8 +65,8 @@ public class MainFrame extends JFrame {
         addActionListeners();
 
 
-
-
+        gridWidthSpinner.addComponentListener(new ComponentAdapter() {
+        });
     }
 
     private void setVariables() {
@@ -90,12 +88,12 @@ public class MainFrame extends JFrame {
 
         minTimeSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
         maxTimeSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
-        minHeightSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
-        maxHeightSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
-        minWidthSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
-        maxWidthSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
-        gridHeightSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
-        gridWidthSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
+        minHeightSpinner = new JSpinner(new SpinnerNumberModel(3, 1, 99, 1));
+        maxHeightSpinner = new JSpinner(new SpinnerNumberModel(6, 1, 99, 1));
+        minWidthSpinner = new JSpinner(new SpinnerNumberModel(3, 1, 99, 1));
+        maxWidthSpinner = new JSpinner(new SpinnerNumberModel(6, 1, 99, 1));
+        gridHeightSpinner = new JSpinner(new SpinnerNumberModel(7, 1, 99, 1));
+        gridWidthSpinner = new JSpinner(new SpinnerNumberModel(6, 1, 99, 1));
         taskNumberSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 99, 1));
 
         taskTextArea = new JTextArea();
@@ -132,12 +130,14 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVariables();
 
-                mesh = new Mesh(meshWidth, meshHeight);
+//                mesh = new Mesh(meshWidth, meshHeight);
+                MeshProvider.init(meshWidth, meshHeight);
+                //MeshProvider.getMesh().printArray();
                 taskTextArea.setText("");
                 if ((maxW < minW) || (maxH < minH) || (maxT < minT)) {
-                    taskTextArea.append("***ERROR***\n" +
-                            "MAX < MIN?\n" +
-                            "****************\n");
+                    taskTextArea.append("*****ERROR*****\n" +
+                                        "*  MAX < MIN  *\n" +
+                                        "***************\n");
                     return;
                 } else {
 
@@ -147,7 +147,7 @@ public class MainFrame extends JFrame {
 
                     TaskGenerator generator = new TaskGenerator(minW, minH, minT, maxW, maxH, maxT, taskNum);
                     taskList = generator.gen();
-
+                    TaskListProvider.init(taskList);
                     refreshTaskWindows();
 
 
@@ -160,18 +160,21 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                final AlgoritmsFrame algoritmsFrame = new AlgoritmsFrame();
+                final AlgoritmsFrame algoritmsFrame = new AlgoritmsFrame(mesh, taskList);
                 algoritmsFrame.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent we)
                     {
                         String ObjButtons[] = {"Yes","No"};
-                        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Warning",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                        int PromptResult = JOptionPane.showOptionDialog(null,"Task list will be erased, are you sure?","Warning",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
                         if(PromptResult==JOptionPane.YES_OPTION)
                         {
                             setVisible(true);
                             //System.exit(0);
                             algoritmsFrame.dispose();
+                            taskTextArea.setText("");
+                            runTestsButton.setEnabled(false);
+
                         }
                     }
                 });

@@ -30,7 +30,7 @@
               <text value="Algorithms"/>
             </properties>
           </component>
-          <component id="47c19" class="javax.swing.JButton" default-binding="true">
+          <component id="47c19" class="javax.swing.JButton" binding="wsbaButton">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -38,7 +38,7 @@
               <text value="WSBA"/>
             </properties>
           </component>
-          <component id="76626" class="javax.swing.JButton" default-binding="true">
+          <component id="76626" class="javax.swing.JButton" binding="busyListButton">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -46,7 +46,7 @@
               <text value="BusyList"/>
             </properties>
           </component>
-          <component id="f6a13" class="javax.swing.JButton" default-binding="true">
+          <component id="f6a13" class="javax.swing.JButton" binding="rncButton">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -56,6 +56,17 @@
           </component>
         </children>
       </grid>
+      <scrollpane id="54bb2">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="feabb" class="javax.swing.JTextArea" binding="resultTextArea">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>
