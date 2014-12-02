@@ -1,4 +1,4 @@
-import mesh.gui.Gui;
+import mesh.gui.MainFrame;
 
 import javax.swing.*;
 
@@ -19,6 +19,6 @@ public class Main {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
 
-        Gui gui = new Gui();
+        MainFrame mainFrame = new MainFrame();
     }
 }

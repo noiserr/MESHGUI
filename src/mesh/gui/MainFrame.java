@@ -1,6 +1,8 @@
 package mesh.gui;
 
+import mesh.comparators.AscendingTaskAreaComparator;
 import mesh.comparators.AscendingTaskTimeComparator;
+import mesh.comparators.DescendingTaskAreaComparator;
 import mesh.model.Mesh;
 import mesh.model.TaskGenerator;
 import mesh.model.Task;
@@ -10,13 +12,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.List;
 
 /**
  * Created by MM on 2014-11-22.
  */
-public class Gui extends JFrame {
+public class MainFrame extends JFrame {
 
     private JPanel rootPanel;
     private int minH, maxH, minW, maxW, minT, maxT, taskNum, meshWidth, meshHeight;
@@ -40,16 +44,21 @@ public class Gui extends JFrame {
     private JButton ascendingButton;
     private JButton descendingButton;
     private JButton shuffleButton;
+    private JRadioButton timeRadioButton;
+    private JRadioButton areaRadioButton;
+    private JButton runTestsButton;
 
     private List<Task> taskList;
 
-    public Gui() {
+    public MainFrame() {
         super("M*E*S*H");
-
+        runTestsButton.setEnabled(false);
         //theme();
         setContentPane(rootPanel);
-        setSize(new Dimension(960, 700));
+        setSize(new Dimension(500, 400));
         setLocationRelativeTo(null);
+//        setLocation(300,200);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         ascendingButton.setEnabled(false);
@@ -122,6 +131,7 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVariables();
+
                 mesh = new Mesh(meshWidth, meshHeight);
                 taskTextArea.setText("");
                 if ((maxW < minW) || (maxH < minH) || (maxT < minT)) {
@@ -142,24 +152,42 @@ public class Gui extends JFrame {
 
 
                 }
+                runTestsButton.setEnabled(true);
             }
         });
 
-        clickMeButton.addActionListener(new ActionListener() {
+        runTestsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame ddframe = new JFrame("xxxxxxxxxx");
-                ddframe.setSize(new Dimension(300, 300));
-                ddframe.setLocationRelativeTo(null);
-                ddframe.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                ddframe.setVisible(true);
+                setVisible(false);
+                final AlgoritmsFrame algoritmsFrame = new AlgoritmsFrame();
+                algoritmsFrame.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent we)
+                    {
+                        String ObjButtons[] = {"Yes","No"};
+                        int PromptResult = JOptionPane.showOptionDialog(null,"Are you sure you want to exit?","Warning",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                        if(PromptResult==JOptionPane.YES_OPTION)
+                        {
+                            setVisible(true);
+                            //System.exit(0);
+                            algoritmsFrame.dispose();
+                        }
+                    }
+                });
             }
         });
 
         ascendingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Collections.sort(taskList, new AscendingTaskTimeComparator());
+
+                if(timeRadioButton.isSelected()){
+                    Collections.sort(taskList, new AscendingTaskTimeComparator());
+
+                }else if(areaRadioButton.isSelected()){
+                    Collections.sort(taskList, new AscendingTaskAreaComparator());
+                }
                 refreshTaskWindows();
 
             }
@@ -168,7 +196,11 @@ public class Gui extends JFrame {
         descendingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Collections.sort(taskList, new DescendingTaskTimeComparator());
+                if(timeRadioButton.isSelected()) {
+                    Collections.sort(taskList, new DescendingTaskTimeComparator());
+                }else if(areaRadioButton.isSelected()){
+                    Collections.sort(taskList, new DescendingTaskAreaComparator());
+                }
                 refreshTaskWindows();
             }
         });
@@ -177,6 +209,7 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //long seed = System.nanoTime();
+
                 Collections.shuffle(taskList);
                 refreshTaskWindows();
             }
