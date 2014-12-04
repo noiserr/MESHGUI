@@ -180,23 +180,23 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 final AlgoritmsFrame algoritmsFrame = new AlgoritmsFrame(mesh, taskList);
-//                algoritmsFrame.addWindowListener(new WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(WindowEvent we)
-//                    {
-//                        String ObjButtons[] = {"Yes","No"};
-//                        int PromptResult = JOptionPane.showOptionDialog(null,"Task list will be erased, are you sure?","Warning",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
-//                        if(PromptResult==JOptionPane.YES_OPTION)
-//                        {
-//                            setVisible(true);
-//                            //System.exit(0);
-//                            algoritmsFrame.dispose();
-////                            taskTextArea.setText("");
-////                            runTestsButton.setEnabled(false);
-//
-//                        }
-//                    }
-//                });
+                algoritmsFrame.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent we)
+                    {
+                        String ObjButtons[] = {"Yes","No"};
+                        int PromptResult = JOptionPane.showOptionDialog(null,"All your will be erased, are you sure?","Warning",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+                        if(PromptResult==JOptionPane.YES_OPTION)
+                        {
+                            setVisible(true);
+                            //System.exit(0);
+                            algoritmsFrame.dispose();
+//                            taskTextArea.setText("");
+//                            runTestsButton.setEnabled(false);
+
+                        }
+                    }
+                });
             }
         });
 

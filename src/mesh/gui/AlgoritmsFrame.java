@@ -52,8 +52,8 @@ public class AlgoritmsFrame extends JFrame {
         setContentPane(rootPanel);
         setSize(new Dimension(550, 400));
         setLocationRelativeTo(null);
-//        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //
         setVisible(true);
 

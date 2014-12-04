@@ -23,7 +23,7 @@ public class Task {
     @Override
     public String toString() {
 
-        return String.format("ID:%2d [%2dx%2d] t=%-3d", id, height, width, time);
+        return String.format("ID:%2d [%2dx%2d] t=%-3d", id, width, height, time);
     }
 
     public int getId() {

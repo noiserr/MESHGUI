@@ -1,0 +1,40 @@
+--------------
+-----MESH-----
+--------------
+
+Część graifczna działa wyśmienicie, zaimplemnotwałem algorytm RNC, który nawet działa.
+
+Dodatkowo dodałem kilka funkcjonalności w klasie Mesh.
+
+Mianowicie:
+-metoda printArray(); wyświetla siatkę w konsoli
+-metoda gridIsFree(x,y, Task allocatingTask); sprawdza czy w całym obszarze można zaalokować zadanie
+-metoda allocateTask(x,y, Task allocatingTask); lokuje zadanie na siatce
+-metoda removeTask(x,y, Task allocatingTask); czyścu obszar po zakonczniu konkretnego zadania
+
+---------------
+----PROTIPS----
+---------------
+
+Indexy w siatce prezentują się nastepująco:
+
+(x,y)
+
+
+(0,0)(0,1)(0,2)
+(1,0)(1,1)(1,2)
+(2,0)(2,1)(3,2)
+
+-------------------------------
+
+Jak wiadomo w celu poruszania sie po takiej siatce można użyć 2 pętli for:
+By wszytsko działało polecam najpierw poruszać się w High, a wdrugiej pętli w Width
+
+for (..; i < getHeight() + startX;..) {
+            for (..; j < getWidth();..) {
+            }
+}
+
+---------------
+------END------
+---------------
