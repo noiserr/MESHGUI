@@ -35,6 +35,10 @@ for (..; i < getHeight();..) {
             }
 }
 
+-------------------------------
+Dwie klasy MeshProvider i TaskListProvider zapewniają
+możliwość pobrania listy z dowolnego miejsca z kodzie, pamiętajcia aby skopiować listę, a nie pracować na oryginale!
+
 ---------------
 ------END------
 ---------------
