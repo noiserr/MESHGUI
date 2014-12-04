@@ -30,7 +30,7 @@ Indexy w siatce prezentują się nastepująco:
 Jak wiadomo w celu poruszania sie po takiej siatce można użyć 2 pętli for:
 By wszytsko działało polecam najpierw poruszać się w High, a wdrugiej pętli w Width
 
-for (..; i < getHeight() + startX;..) {
+for (..; i < getHeight();..) {
             for (..; j < getWidth();..) {
             }
 }
