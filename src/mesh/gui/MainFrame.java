@@ -1,19 +1,14 @@
 package mesh.gui;
 
-import mesh.comparators.AscendingTaskAreaComparator;
-import mesh.comparators.AscendingTaskTimeComparator;
-import mesh.comparators.DescendingTaskAreaComparator;
 import mesh.model.Mesh;
 import mesh.model.TaskGenerator;
 import mesh.model.Task;
-import mesh.comparators.DescendingTaskTimeComparator;
 import mesh.providers.MeshProvider;
 import mesh.providers.TaskListProvider;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import java.util.List;
 
 /**
@@ -53,17 +48,13 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         super("M*E*S*H");
         runTestsButton.setEnabled(false);
-        //theme();
         setContentPane(rootPanel);
         setSize(new Dimension(500, 400));
         setLocationRelativeTo(null);
-//        setLocation(300,200);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-//        ascendingButton.setEnabled(false);
-//        descendingButton.setEnabled(false);
-//        shuffleButton.setEnabled(false);
+
         addActionListeners();
 
 
@@ -110,28 +101,6 @@ public class MainFrame extends JFrame {
 
     }
 
-//    public void theme() {
-//        try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            System.out.println(UIManager.getSystemLookAndFeelClassName());
-//            SwingUtilities.updateComponentTreeUI(this);
-//
-//
-//        } catch (ClassNotFoundException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (InstantiationException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (UnsupportedLookAndFeelException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    }
-
     public void addActionListeners(){
 
         gridUpdateButton.addActionListener(new ActionListener() {
@@ -158,18 +127,12 @@ public class MainFrame extends JFrame {
                                         "*  MAX < MIN  *\n" +
                                         "***************\n");
                     return;
+
                 } else {
-
-//                    ascendingButton.setEnabled(true);
-//                    descendingButton.setEnabled(true);
-//                    shuffleButton.setEnabled(true);
-
                     TaskGenerator generator = new TaskGenerator(minW, minH, minT, maxW, maxH, maxT, taskNum);
                     taskList = generator.gen();
                     TaskListProvider.init(taskList);
                     refreshTaskWindows();
-
-
                 }
                 runTestsButton.setEnabled(true);
             }
@@ -179,20 +142,15 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                final AlgoritmsFrame algoritmsFrame = new AlgoritmsFrame(mesh, taskList);
-                algoritmsFrame.addWindowListener(new WindowAdapter() {
+                final AlgorithmsFrame algorithmsFrame = new AlgorithmsFrame();
+                algorithmsFrame.addWindowListener(new WindowAdapter() {
                     @Override
-                    public void windowClosing(WindowEvent we)
-                    {
-                        String ObjButtons[] = {"Yes","No"};
-                        int PromptResult = JOptionPane.showOptionDialog(null,"All your will be erased, are you sure?","Warning",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
-                        if(PromptResult==JOptionPane.YES_OPTION)
-                        {
+                    public void windowClosing(WindowEvent we) {
+                        String ObjButtons[] = {"Yes", "No"};
+                        int PromptResult = JOptionPane.showOptionDialog(null, "All your will be erased, are you sure?", "Warning", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
+                        if (PromptResult == JOptionPane.YES_OPTION) {
                             setVisible(true);
-                            //System.exit(0);
-                            algoritmsFrame.dispose();
-//                            taskTextArea.setText("");
-//                            runTestsButton.setEnabled(false);
+                            algorithmsFrame.dispose();
 
                         }
                     }
@@ -200,42 +158,7 @@ public class MainFrame extends JFrame {
             }
         });
 
-//        ascendingButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                if(timeRadioButton.isSelected()){
-//                    Collections.sort(taskList, new AscendingTaskTimeComparator());
-//
-//                }else if(areaRadioButton.isSelected()){
-//                    Collections.sort(taskList, new AscendingTaskAreaComparator());
-//                }
-//                refreshTaskWindow();
-//
-//            }
-//        });
-//
-//        descendingButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                if(timeRadioButton.isSelected()) {
-//                    Collections.sort(taskList, new DescendingTaskTimeComparator());
-//                }else if(areaRadioButton.isSelected()){
-//                    Collections.sort(taskList, new DescendingTaskAreaComparator());
-//                }
-//                refreshTaskWindow();
-//            }
-//        });
-//
-//        shuffleButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //long seed = System.nanoTime();
-//
-//                Collections.shuffle(taskList);
-//                refreshTaskWindow();
-//            }
-//        });
+
     }
 
     public void refreshTaskWindows(){

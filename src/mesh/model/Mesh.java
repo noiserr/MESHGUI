@@ -14,10 +14,7 @@ public class Mesh {
         System.out.println("New MESH"+w + " x "+h);
         this.meshWidth = w;
         this.meshHeight = h;
-
         grid = new int[meshHeight][meshWidth];
-
-
         fillArray();
     }
 
@@ -31,12 +28,6 @@ public class Mesh {
 
     public void allocateTask(int startX, int startY, Task allocatingTask) {
 
-        System.out.println("Allocating task: " + allocatingTask.getId());
-        System.out.println("Task Width: " + allocatingTask.getWidth() + " Task Height: " + allocatingTask.getHeight());
-        System.out.println("StartX: " + startX + " StartY: "+ startY);
-        System.out.println("allocatingTask.getWidth() + startY) >= (getMeshWidth()");
-        System.out.println((allocatingTask.getWidth() + startY) +" " + (getMeshWidth()));
-
         for (int i = startX; i < allocatingTask.getHeight() + startX; i++) {
             for (int j = startY; j < allocatingTask.getWidth() + startY; j++) {
                 if ((allocatingTask.getWidth() + startY) > getMeshWidth()) {
@@ -47,9 +38,7 @@ public class Mesh {
                     grid[i][j] = allocatingTask.getId();
                     MeshProvider.getMesh().printArray();
                 }
-//                System.out.print(i+","+j+ " ");
             }
-//            System.out.println();
         }
     }
 
@@ -71,7 +60,6 @@ public class Mesh {
     //Check if small grid is free
     public boolean gridIsFree(int startX, int startY, Task allocatingTask) {
         int allocator = 0;
-//        System.out.println("StartX: " + startX + );
         for (int i = startX; i < allocatingTask.getHeight() + startX; i++) {
             for (int j = startY; j < allocatingTask.getWidth() + startY; j++) {
                 if((allocatingTask.getHeight() + startX) >= (getMeshWidth())){
@@ -86,10 +74,8 @@ public class Mesh {
         }
 
         if (allocator == 0) {
-//            System.out.println("Wolne");
             return true;
         } else
-//            System.out.println("zajete");
             return false;
     }
 
@@ -118,7 +104,4 @@ public class Mesh {
         return meshHeight;
     }
 
-    public int[][] getGrid() {
-        return grid;
-    }
 }
