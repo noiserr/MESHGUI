@@ -4,16 +4,15 @@ package mesh.model;
  * Created by MM on 2014-11-22.
  */
 public class Task {
-    private int id;
-    private int height;
-    private int width;
-    private int time;
-    private boolean placed = false;
+    protected int id;
+    protected int height;
+    protected int width;
+    protected int time;
 
     public Task(int id, int w, int h, int t) {
         this.id = id;
-        this.height = w;
-        this.width = h;
+        this.height = h;
+        this.width = w;
         this.time = t;
     }
 
@@ -24,12 +23,7 @@ public class Task {
     @Override
     public String toString() {
 
-
-        String format = "ID:%2d [%2dx%2d] t=%-3d";
-
-        String someLine;
-        someLine = String.format(format, id, width, height, time);
-        return someLine;
+        return String.format("ID:%2d [%2dx%2d] t=%-3d", id, height, width, time);
     }
 
     public int getId() {
@@ -48,11 +42,4 @@ public class Task {
         return time;
     }
 
-    public boolean isPlaced() {
-        return placed;
-    }
-
-    public void setPlaced(boolean placed) {
-        this.placed = placed;
-    }
 }

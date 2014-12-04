@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="mesh.gui.AlgoritmsFrame">
-  <grid id="27dc6" binding="rootPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="508" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-4013374"/>
+    </properties>
     <border type="none"/>
     <children>
-      <grid id="7387e" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="2f9fe" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints border-constraint="North"/>
-        <properties/>
+        <constraints>
+          <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4013374"/>
+        </properties>
         <border type="none"/>
         <children>
-          <component id="460c9" class="javax.swing.JButton" binding="firstFitButton" default-binding="true">
+          <component id="134e0" class="javax.swing.JButton" binding="firstFitButton" default-binding="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -22,7 +29,7 @@
               <verifyInputWhenFocusTarget value="true"/>
             </properties>
           </component>
-          <component id="f93c2" class="javax.swing.JLabel">
+          <component id="9f24e" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -30,7 +37,7 @@
               <text value="Algorithms"/>
             </properties>
           </component>
-          <component id="47c19" class="javax.swing.JButton" binding="wsbaButton">
+          <component id="fe188" class="javax.swing.JButton" binding="wsbaButton">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -38,7 +45,7 @@
               <text value="WSBA"/>
             </properties>
           </component>
-          <component id="76626" class="javax.swing.JButton" binding="busyListButton">
+          <component id="dfe9d" class="javax.swing.JButton" binding="busyListButton">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -46,7 +53,7 @@
               <text value="BusyList"/>
             </properties>
           </component>
-          <component id="f6a13" class="javax.swing.JButton" binding="rncButton">
+          <component id="12727" class="javax.swing.JButton" binding="rncButton">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -56,17 +63,126 @@
           </component>
         </children>
       </grid>
-      <scrollpane id="54bb2">
-        <constraints border-constraint="Center"/>
+      <scrollpane id="62000">
+        <constraints>
+          <grid row="1" column="0" row-span="3" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="feabb" class="javax.swing.JTextArea" binding="resultTextArea">
+          <component id="483e8" class="javax.swing.JTextArea" binding="taskTextArea" custom-create="true">
             <constraints/>
             <properties/>
           </component>
         </children>
       </scrollpane>
+      <component id="d68e3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Task LIst"/>
+        </properties>
+      </component>
+      <grid id="1c429" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4013374"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="109bc" class="javax.swing.JButton" binding="ascendingButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="▲"/>
+            </properties>
+          </component>
+          <component id="aebad" class="javax.swing.JButton" binding="descendingButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="▼"/>
+            </properties>
+          </component>
+          <component id="c1b3e" class="javax.swing.JButton" binding="shuffleButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Shuffle"/>
+            </properties>
+          </component>
+          <component id="600c0" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Sort By:"/>
+            </properties>
+          </component>
+          <component id="d7d7" class="javax.swing.JRadioButton" binding="timeRadioButton" default-binding="true">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-4013374"/>
+              <selected value="true"/>
+              <text value="Time"/>
+            </properties>
+          </component>
+          <component id="82f38" class="javax.swing.JRadioButton" binding="areaRadioButton" default-binding="true">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-4013374"/>
+              <text value="Area"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <scrollpane id="83e6">
+        <constraints>
+          <grid row="3" column="1" row-span="2" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="87250" class="javax.swing.JTextArea" binding="outputTextArea">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="e090f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Output"/>
+        </properties>
+      </component>
+      <component id="4cb86" class="javax.swing.JButton" binding="panicButton">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-4508869"/>
+          <text value="PANIC!"/>
+        </properties>
+      </component>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="buttonGroup1">
+      <member id="d7d7"/>
+      <member id="82f38"/>
+    </group>
+  </buttonGroups>
 </form>

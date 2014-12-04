@@ -38,9 +38,7 @@ public class TaskGenerator {
 
         }
         return taskList;
-//        for (Object o : taskList) {
-//            System.out.println(o);
-//        }
+
     }
 }
 
