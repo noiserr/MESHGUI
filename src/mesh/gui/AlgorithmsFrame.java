@@ -79,21 +79,26 @@ public class AlgorithmsFrame extends JFrame {
         rncButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                outputTextArea.append("------------");
+                outputTextArea.append("RNC Algorithm");
+                outputTextArea.append("------------");
                 rncAlgorithm = new RNCAlgorithm();
                 long startTime = System.nanoTime();
                 rncAlgorithm.run();
                 long endTime = System.nanoTime();
                 long duration = (endTime - startTime) / 1000000;
-                outputTextArea.append("\nPik of time: " + rncAlgorithm.getPassedTime());
+                outputTextArea.append("\nTime passed: " + rncAlgorithm.getPassedTime());
+                outputTextArea.append("\nFailed allocations: "+ rncAlgorithm.getNumberOfFailedAllocations());
                 outputTextArea.append("\nActual computing time: " + duration + "ms");
+                outputTextArea.append("\n--------------");
+                outputTextArea.append("---------------");
+                outputTextArea.append("---------------");
             }
         });
 
         ascendingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 if (timeRadioButton.isSelected()) {
                     Collections.sort(taskList, new AscendingTaskTimeComparator());
 
@@ -146,6 +151,8 @@ public class AlgorithmsFrame extends JFrame {
         taskTextArea = new JTextArea();
 
         taskTextArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        outputTextArea = new JTextArea();
+        outputTextArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
 
     }
 }

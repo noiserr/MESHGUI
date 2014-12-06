@@ -16,12 +16,12 @@ public class RNCAlgorithm {
 
     //Copy task list from TaskListProvider, IMPORTANT!
     private List<Task> taskList = new ArrayList<Task>(TaskListProvider.getTaskList());
-    private Thread t;
     private List<AllocatedTask> allocatedTaskList = new ArrayList<AllocatedTask>();
     private Mesh mesh = MeshProvider.getMesh();
-
     private Random random = new Random();
+
     private int passedTime = 0;
+    private int numberOfFailedAllocations = 0;
 
     public void run() {
         MeshProvider.getMesh().fillArray();
@@ -53,6 +53,7 @@ public class RNCAlgorithm {
             timeLapse();
             allocatedTaskList.add(new AllocatedTask(currentTask, y, x));
         } else {
+            numberOfFailedAllocations++;
             taskList.add(currentTask);
             timeLapse();
         }
@@ -77,5 +78,9 @@ public class RNCAlgorithm {
 
     public int getPassedTime() {
         return passedTime;
+    }
+
+    public int getNumberOfFailedAllocations() {
+        return numberOfFailedAllocations;
     }
 }
