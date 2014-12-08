@@ -22,6 +22,7 @@ public class RNCAlgorithm {
 
     private int passedTime = 0;
     private int numberOfFailedAllocations = 0;
+    private int frag =0;
 
     public void run() {
         MeshProvider.getMesh().fillArray();
@@ -32,11 +33,15 @@ public class RNCAlgorithm {
             Task temporaryTask = taskList.get(0);
             tryToAllocate(temporaryTask);
             findAndRemoveFinished();
+
+
             if (taskList.isEmpty()) {
                 do {
                     timeLapse();
                     findAndRemoveFinished();
                 } while (!allocatedTaskList.isEmpty());
+
+
                 break;
             }
         }
@@ -47,7 +52,8 @@ public class RNCAlgorithm {
         int x = random.nextInt(mesh.getMeshWidth());
         int y = random.nextInt(mesh.getMeshHeight());
         taskList.remove(0);
-        System.out.println("X: " +x+ " Y: "+y);
+//        System.out.println("X: " +x+ " Y: "+y);
+
         if (mesh.gridIsFree(x, y, currentTask)) {
             mesh.allocateTask(x, y, currentTask);
             timeLapse();
@@ -60,11 +66,19 @@ public class RNCAlgorithm {
     }
 
     public void timeLapse() {
+
+        if(!allocatedTaskList.isEmpty()){
+            frag += MeshProvider.getMesh().countFreeNodes();
+        }
+
         passedTime++;
         for (AllocatedTask allocatedTask : allocatedTaskList) {
             allocatedTask.timeLapse();
 
         }
+
+        System.out.println(frag);
+        MeshProvider.getMesh().printArray();
     }
 
     public void findAndRemoveFinished() {
@@ -82,5 +96,12 @@ public class RNCAlgorithm {
 
     public int getNumberOfFailedAllocations() {
         return numberOfFailedAllocations;
+    }
+
+    public float getFragmentation(){
+
+        float v = (float) frag/(MeshProvider.getMesh().getMeshWidth() * MeshProvider.getMesh().getMeshHeight() * passedTime);
+        return v;
+
     }
 }

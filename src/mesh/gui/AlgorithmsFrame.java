@@ -5,7 +5,9 @@ import mesh.comparators.AscendingTaskAreaComparator;
 import mesh.comparators.AscendingTaskTimeComparator;
 import mesh.comparators.DescendingTaskAreaComparator;
 import mesh.comparators.DescendingTaskTimeComparator;
+import mesh.model.Mesh;
 import mesh.model.Task;
+import mesh.providers.MeshProvider;
 import mesh.providers.TaskListProvider;
 
 import javax.swing.*;
@@ -34,6 +36,8 @@ public class AlgorithmsFrame extends JFrame {
     private JRadioButton areaRadioButton;
     private JTextArea outputTextArea;
     private JButton panicButton;
+    private JLabel meshWLabel;
+    private JLabel taskLabel;
 
     private List<Task> taskList = new ArrayList<Task>(TaskListProvider.getTaskList());
     RNCAlgorithm rncAlgorithm;
@@ -42,6 +46,9 @@ public class AlgorithmsFrame extends JFrame {
     public AlgorithmsFrame() {
         super("Algorithms");
         refreshTaskWindow();
+        meshWLabel.setText("Mesh [" + MeshProvider.getMesh().getMeshWidth() +"x" + MeshProvider.getMesh().getMeshHeight()+"]");
+//        meshHLabel.setText("Mesh H: " + MeshProvider.getMesh().getMeshHeight());
+        taskLabel.setText("Tasks: " + TaskListProvider.getTaskList().size());
         addActionListeners();
         setContentPane(rootPanel);
         setSize(new Dimension(550, 400));
@@ -79,9 +86,9 @@ public class AlgorithmsFrame extends JFrame {
         rncButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                outputTextArea.append("------------");
+                outputTextArea.append("\n------------");
                 outputTextArea.append("RNC Algorithm");
-                outputTextArea.append("------------");
+                outputTextArea.append("------------\n");
                 rncAlgorithm = new RNCAlgorithm();
                 long startTime = System.nanoTime();
                 rncAlgorithm.run();
@@ -90,6 +97,7 @@ public class AlgorithmsFrame extends JFrame {
                 outputTextArea.append("\nTime passed: " + rncAlgorithm.getPassedTime());
                 outputTextArea.append("\nFailed allocations: "+ rncAlgorithm.getNumberOfFailedAllocations());
                 outputTextArea.append("\nActual computing time: " + duration + "ms");
+                outputTextArea.append("\nFragmentation: " + rncAlgorithm.getFragmentation());
                 outputTextArea.append("\n--------------");
                 outputTextArea.append("---------------");
                 outputTextArea.append("---------------");
@@ -153,6 +161,7 @@ public class AlgorithmsFrame extends JFrame {
         taskTextArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
         outputTextArea = new JTextArea();
         outputTextArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
+//        meshWLabel = new JLabel("Mesh W: " + MeshProvider.getMesh().getMeshWidth());
 
     }
 }

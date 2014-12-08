@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
         maxWidthSpinner = new JSpinner(new SpinnerNumberModel(11, 1, 99, 1));
         gridHeightSpinner = new JSpinner(new SpinnerNumberModel(11, 1, 99, 1));
         gridWidthSpinner = new JSpinner(new SpinnerNumberModel(11, 1, 99, 1));
-        taskNumberSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
+        taskNumberSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 999, 1));
 
         taskTextArea = new JTextArea();
         taskTextArea.setFont(new Font("Monospaced", Font.PLAIN, 14));
