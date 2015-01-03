@@ -1,5 +1,6 @@
 package mesh.gui;
 
+import mesh.algorithms.BusyList;
 import mesh.algorithms.RNCAlgorithm;
 import mesh.comparators.AscendingTaskAreaComparator;
 import mesh.comparators.AscendingTaskTimeComparator;
@@ -41,6 +42,7 @@ public class AlgorithmsFrame extends JFrame {
 
     private List<Task> taskList = new ArrayList<Task>(TaskListProvider.getTaskList());
     RNCAlgorithm rncAlgorithm;
+    BusyList BusyListAlgorithm;
 
 
     public AlgorithmsFrame() {
@@ -71,7 +73,21 @@ public class AlgorithmsFrame extends JFrame {
         busyListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                outputTextArea.append("\n------------");
+                outputTextArea.append("BusyList Algorithm");
+                outputTextArea.append("------------\n");
+                BusyListAlgorithm = new BusyList();
+                long startTime = System.nanoTime();
+                BusyListAlgorithm.run();
+                long endTime = System.nanoTime();
+                long duration = (endTime - startTime) / 1000000;
+                outputTextArea.append("\nTime passed: " + BusyListAlgorithm.getPassedTime());
+                outputTextArea.append("\nFailed allocations: "+ BusyListAlgorithm.getNumberOfFailedAllocations());
+                outputTextArea.append("\nActual computing time: " + duration + "ms");
+                outputTextArea.append("\nFragmentation: " + BusyListAlgorithm.getFragmentation());
+                outputTextArea.append("\n--------------");
+                outputTextArea.append("---------------");
+                outputTextArea.append("---------------");
             }
         });
 

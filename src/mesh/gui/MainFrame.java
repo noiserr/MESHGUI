@@ -85,14 +85,14 @@ public class MainFrame extends JFrame {
     private void createUIComponents() {
 
 
-        minTimeSpinner = new JSpinner(new SpinnerNumberModel(3, 1, 99, 1));
-        maxTimeSpinner = new JSpinner(new SpinnerNumberModel(7, 1, 99, 1));
-        minHeightSpinner = new JSpinner(new SpinnerNumberModel(6, 1, 99, 1));
-        maxHeightSpinner = new JSpinner(new SpinnerNumberModel(6, 1, 99, 1));
-        minWidthSpinner = new JSpinner(new SpinnerNumberModel(11, 1, 99, 1));
-        maxWidthSpinner = new JSpinner(new SpinnerNumberModel(11, 1, 99, 1));
-        gridHeightSpinner = new JSpinner(new SpinnerNumberModel(11, 1, 99, 1));
-        gridWidthSpinner = new JSpinner(new SpinnerNumberModel(11, 1, 99, 1));
+        minTimeSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
+        maxTimeSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 99, 1));
+        minHeightSpinner = new JSpinner(new SpinnerNumberModel(3, 1, 99, 1));
+        maxHeightSpinner = new JSpinner(new SpinnerNumberModel(3, 1, 99, 1));
+        minWidthSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 99, 1));
+        maxWidthSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 99, 1));
+        gridHeightSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 99, 1));
+        gridWidthSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 99, 1));
         taskNumberSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 999, 1));
 
         taskTextArea = new JTextArea();

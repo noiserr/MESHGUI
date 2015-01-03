@@ -28,9 +28,9 @@ public class Mesh {
 
     public void allocateTask(int startX, int startY, Task allocatingTask) {
 
-        for (int i = startX; i < allocatingTask.getHeight() + startX; i++) {
-            for (int j = startY; j < allocatingTask.getWidth() + startY; j++) {
-                if ((allocatingTask.getWidth() + startY) > getMeshWidth()) {
+        for (int i = startY; i < allocatingTask.getHeight() + startY; i++) {
+            for (int j = startX; j < allocatingTask.getWidth() + startX; j++) {
+                if ((allocatingTask.getWidth() + startX) > getMeshWidth()) {
                     grid[i][j % (getMeshWidth())] = allocatingTask.getId();
 //                    System.out.println("j % (getMeshWidth():" + j % getMeshWidth());
 //                    MeshProvider.getMesh().printArray();
@@ -43,9 +43,9 @@ public class Mesh {
     }
 
     public void removeTask(int startX, int startY, Task allocatingTask) {
-        for (int i = startX; i < allocatingTask.getHeight() + startX; i++) {
-            for (int j = startY; j < allocatingTask.getWidth() + startY; j++) {
-                if ((allocatingTask.getWidth() + startY) >= getMeshWidth()) {
+        for (int i = startY; i < allocatingTask.getHeight() + startY; i++) {
+            for (int j = startX; j < allocatingTask.getWidth() + startX; j++) {
+                if ((allocatingTask.getWidth() + startX) >= getMeshWidth()) {
                     grid[i][j % getMeshWidth()] = 0;
                 } else {
                     grid[i][j] = 0;
@@ -55,14 +55,27 @@ public class Mesh {
         }
     }
 
+    public void drawTask(int startX, int startY, Task allocatingTask) {
+        for (int i = startY; i < allocatingTask.getHeight() + startY; i++) {
+            for (int j = startX; j < allocatingTask.getWidth() + startX; j++) {
+                if ((allocatingTask.getWidth() + startX) >= getMeshWidth()) {
+                    grid[i][j % getMeshWidth()] = 9;
+                } else {
+                    grid[i][j] = 9;
+
+                }
+            }
+        }
+    }
+
     //Check if small grid is free
     public boolean gridIsFree(int startX, int startY, Task allocatingTask) {
         int allocator = 0;
-        for (int i = startX; i < allocatingTask.getHeight() + startX; i++) {
-            for (int j = startY; j < allocatingTask.getWidth() + startY; j++) {
-                if ((allocatingTask.getHeight() + startX) >= (getMeshWidth())) {
+        for (int i = startY; i < allocatingTask.getHeight() + startY; i++) {
+            for (int j = startX; j < allocatingTask.getWidth() + startX; j++) {
+                if ((allocatingTask.getHeight() + startY) > (getMeshHeight())) {
                     return false;
-                } else if ((allocatingTask.getWidth() + startY) > getMeshWidth()) {
+                } else if ((allocatingTask.getWidth() + startX) > getMeshWidth()) {
                     allocator += grid[i][j % getMeshWidth()];
                 } else {
                     allocator += grid[i][j];
