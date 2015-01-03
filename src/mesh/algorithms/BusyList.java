@@ -24,6 +24,8 @@ public class BusyList {
     private int numberOfFailedAllocations = 0;
     private int frag =0;
 
+    private int[] points = new int[taskList.size()];
+
     public void run() {
         MeshProvider.getMesh().fillArray();
 
@@ -52,7 +54,6 @@ public class BusyList {
                 for (int x=4; x < mesh.getMeshWidth(); x++) {
                     if (mesh.gridIsFree(x, y, taskList.get(task_index))) {
                         countPoints(task_index, x, y);
-
                     }
                 }
             }
@@ -63,8 +64,10 @@ public class BusyList {
     {
         System.out.println("Task: " +task+ " (" +x+ "," +y+ ")");
        // System.out.println("Task_size (" +taskList.get(task).getWidth()+ "," +taskList.get(task).getHeight()+ ")");
-        mesh.drawTask(x, y, taskList.get(task));
-        MeshProvider.getMesh().printArray();
+       // System.out.println("Task_size: " +task+ " (" +x+ "," +y+ ")");
+        if (y == 0 || y == mesh.getMeshHeight()-1 ) {
+            points[task] = taskList.get(task).getWidth();
+        }
 
     }
 
