@@ -12,6 +12,9 @@ Mianowicie:
 -metoda allocateTask(x,y, Task allocatingTask); lokuje zadanie na siatce
 -metoda removeTask(x,y, Task allocatingTask); czyścu obszar po zakonczniu konkretnego zadania
 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 W metodach:
 allocateTask(int startX, int startY, Task allocatingTask)
 removeTask(int startX, int startY, Task allocatingTask)
@@ -19,7 +22,7 @@ gridIsFree(int startX, int startY, Task allocatingTask)
 
 z klasy Mesh, były pomieszane zmienne X i Y, oraz metoda gridIsFree() nie wyszukiwała wszystkich możliwości alokacji zadań, naniosłem
 kilka zmian i powinno działać dobrze. Jak by były problemy to piszcie ~~~ Mariusz
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ---------------
 ----PROTIPS----
 ---------------
