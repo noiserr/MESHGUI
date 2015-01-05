@@ -14,7 +14,7 @@ public class Mesh {
         System.out.println("New MESH" + w + " x " + h);
         this.meshWidth = w;
         this.meshHeight = h;
-        grid = new int[meshHeight][meshWidth];
+        grid = new int[meshWidth][meshHeight];
         fillArray();
     }
 
@@ -31,11 +31,11 @@ public class Mesh {
         for (int i = startY; i < allocatingTask.getHeight() + startY; i++) {
             for (int j = startX; j < allocatingTask.getWidth() + startX; j++) {
                 if ((allocatingTask.getWidth() + startX) > getMeshWidth()) {
-                    grid[i][j % (getMeshWidth())] = allocatingTask.getId();
+                    grid[j % (getMeshWidth())][i] = allocatingTask.getId();
 //                    System.out.println("j % (getMeshWidth():" + j % getMeshWidth());
 //                    MeshProvider.getMesh().printArray();
                 } else {
-                    grid[i][j] = allocatingTask.getId();
+                    grid[j][i] = allocatingTask.getId();
 //                    MeshProvider.getMesh().printArray();
                 }
             }
@@ -46,22 +46,9 @@ public class Mesh {
         for (int i = startY; i < allocatingTask.getHeight() + startY; i++) {
             for (int j = startX; j < allocatingTask.getWidth() + startX; j++) {
                 if ((allocatingTask.getWidth() + startX) >= getMeshWidth()) {
-                    grid[i][j % getMeshWidth()] = 0;
+                    grid[j % getMeshWidth()][i] = 0;
                 } else {
-                    grid[i][j] = 0;
-
-                }
-            }
-        }
-    }
-
-    public void drawTask(int startX, int startY, Task allocatingTask) {
-        for (int i = startY; i < allocatingTask.getHeight() + startY; i++) {
-            for (int j = startX; j < allocatingTask.getWidth() + startX; j++) {
-                if ((allocatingTask.getWidth() + startX) >= getMeshWidth()) {
-                    grid[i][j % getMeshWidth()] = 9;
-                } else {
-                    grid[i][j] = 9;
+                    grid[j][i] = 0;
 
                 }
             }
@@ -76,9 +63,9 @@ public class Mesh {
                 if ((allocatingTask.getHeight() + startY) > (getMeshHeight())) {
                     return false;
                 } else if ((allocatingTask.getWidth() + startX) > getMeshWidth()) {
-                    allocator += grid[i][j % getMeshWidth()];
+                    allocator += grid[j % getMeshWidth()][i];
                 } else {
-                    allocator += grid[i][j];
+                    allocator += grid[j][i];
 
                 }
             }
@@ -90,6 +77,14 @@ public class Mesh {
             return false;
     }
 
+    public void countPoints(int task, int x, int y) {
+        int counter =0;
+        for (int i=0; y < getMeshHeight(); i++) {
+            for (int j = 0; x < getMeshWidth(); j++) {
+
+            }
+        }
+    }
 
     public void printArray() {
         System.out.println("");
@@ -97,7 +92,7 @@ public class Mesh {
 
             for (int j = 0; j < grid[i].length; j++) {
 
-                System.out.print(grid[i][j] + " ");
+                System.out.print(grid[j][i] + " ");
                 //System.out.println();
             }
             System.out.println();

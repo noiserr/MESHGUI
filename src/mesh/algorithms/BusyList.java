@@ -50,26 +50,34 @@ public class BusyList {
 
     public void makeCandidates() {
         for(int task_index=0; task_index < taskList.size(); task_index++) {
-            for (int y=2; y < mesh.getMeshHeight(); y++) {
-                for (int x=4; x < mesh.getMeshWidth(); x++) {
+            for (int y=0; y < mesh.getMeshHeight(); y++) {
+                for (int x=0; x < mesh.getMeshWidth(); x++) {
                     if (mesh.gridIsFree(x, y, taskList.get(task_index))) {
-                        countPoints(task_index, x, y);
+                        countPointsBorders(task_index, y);
+                       // mesh.countPoints(task_index, x, y);
+                        //System.out.println("Task_points: " +points[task_index]);
                     }
                 }
             }
         }
     }
 
-    public void countPoints(int task, int x, int y)
+    public void countPointsBorders(int task, int y)
     {
-        System.out.println("Task: " +task+ " (" +x+ "," +y+ ")");
-       // System.out.println("Task_size (" +taskList.get(task).getWidth()+ "," +taskList.get(task).getHeight()+ ")");
-       // System.out.println("Task_size: " +task+ " (" +x+ "," +y+ ")");
-        if (y == 0 || y == mesh.getMeshHeight()-1 ) {
-            points[task] = taskList.get(task).getWidth();
+        //System.out.println("Task: " +task+ " (" +x+ "," +y+ ")");
+        //System.out.println("Task_size (" +taskList.get(task).getWidth()+ "," +taskList.get(task).getHeight()+ ")");
+        //System.out.println("Mesh: " +(mesh.getMeshHeight()-1));
+        if (mesh.getMeshHeight() == taskList.get(task).getHeight()) {
+        points[task] = 2*taskList.get(task).getWidth();
         }
-
+        else if (y == 0 || y == mesh.getMeshHeight()-taskList.get(task).getHeight()) {
+        points[task] = taskList.get(task).getWidth();
+        }
+        else {
+            points[task] = 0;
+        }
     }
+
 
     public void tryToAllocate(Task currentTask) {
         int x = random.nextInt(mesh.getMeshWidth());
