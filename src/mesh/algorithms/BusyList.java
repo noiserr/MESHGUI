@@ -83,7 +83,7 @@ public class BusyList {
         int x = random.nextInt(mesh.getMeshWidth());
         int y = random.nextInt(mesh.getMeshHeight());
         taskList.remove(0);
-       System.out.println("X: " +x+ " Y: "+y);
+       System.out.println("X: " +currentTask.getWidth()+ " Y: "+currentTask.getHeight());
 
 
         if (mesh.gridIsFree(x, y, currentTask)) {
