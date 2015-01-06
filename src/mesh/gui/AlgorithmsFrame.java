@@ -1,6 +1,7 @@
 package mesh.gui;
 
 import mesh.algorithms.BusyList;
+import mesh.algorithms.FirstFit;
 import mesh.algorithms.RNCAlgorithm;
 import mesh.comparators.AscendingTaskAreaComparator;
 import mesh.comparators.AscendingTaskTimeComparator;
@@ -43,6 +44,7 @@ public class AlgorithmsFrame extends JFrame {
     private List<Task> taskList = new ArrayList<Task>(TaskListProvider.getTaskList());
     RNCAlgorithm rncAlgorithm;
     BusyList BusyListAlgorithm;
+    FirstFit FirstFitAlgorithm;
 
 
     public AlgorithmsFrame() {
@@ -65,7 +67,21 @@ public class AlgorithmsFrame extends JFrame {
         firstFitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                outputTextArea.append("\n------------");
+                outputTextArea.append("FirstFit Algorithm");
+                outputTextArea.append("------------\n");
+                FirstFitAlgorithm = new FirstFit();
+                long startTime = System.nanoTime();
+                FirstFitAlgorithm.run();
+                long endTime = System.nanoTime();
+                long duration = (endTime - startTime) / 1000000;
+                outputTextArea.append("\nTime passed: " + FirstFitAlgorithm.getPassedTime());
+                outputTextArea.append("\nFailed allocations: "+ FirstFitAlgorithm.getNumberOfFailedAllocations());
+                outputTextArea.append("\nActual computing time: " + duration + "ms");
+                outputTextArea.append("\nFragmentation: " + FirstFitAlgorithm.getFragmentation());
+                outputTextArea.append("\n--------------");
+                outputTextArea.append("---------------");
+                outputTextArea.append("---------------");
             }
         });
 
