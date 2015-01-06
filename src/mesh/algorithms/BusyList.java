@@ -23,18 +23,32 @@ public class BusyList {
     private int passedTime = 0;
     private int numberOfFailedAllocations = 0;
     private int frag =0;
+    private int[] candidates = new int[4];
 
-    private int[] points = new int[taskList.size()];
 
     public void run() {
         MeshProvider.getMesh().fillArray();
 
-        makeCandidates();
-/*        while (true) {
+        while (true) {
+            makeCandidates();
+            for (int i=0; i < 4; i++) {
+                System.out.println("Candidates[" +i+ "] = " +candidates[i]);
+            }
+            if (mesh.gridIsFree(candidates[2], candidates[3], taskList.get(candidates[0]))) {
+                mesh.allocateTask(candidates[2], candidates[3], taskList.get(candidates[0]));
+                timeLapse();
+                allocatedTaskList.add(new AllocatedTask(taskList.get(candidates[0]), candidates[3], candidates[2]));
+                taskList.remove(candidates[0]);
 
-//           Task temporaryTask = taskList.get(0);
-//            tryToAllocate(temporaryTask);
-//            findAndRemoveFinished();
+            } else {
+                timeLapse();
+            }
+
+            for (int i=0; i < 4; i++) {
+                candidates[i] = 0;
+            }
+
+            findAndRemoveFinished();
 
             if (taskList.isEmpty()) {
                 do {
@@ -45,7 +59,7 @@ public class BusyList {
 
                 break;
             }
-        }*/
+        }
     }
 
     public void makeCandidates() {
@@ -53,48 +67,38 @@ public class BusyList {
             for (int y=0; y < mesh.getMeshHeight(); y++) {
                 for (int x=0; x < mesh.getMeshWidth(); x++) {
                     if (mesh.gridIsFree(x, y, taskList.get(task_index))) {
-                        countPointsBorders(task_index, y);
-                       // mesh.countPoints(task_index, x, y);
-                        //System.out.println("Task_points: " +points[task_index]);
+                        int pts = countPointsBorders(task_index, y);
+                        pts += mesh.countPoints(x, y, task_index, taskList.get(task_index));
+                        //System.out.println("Task: " +task_index+ " (" +x+ "," +y+ ")");
+                        //System.out.println("Task_points: " +pts);
+
+                        if (candidates[1] < pts){
+                            candidates[0] = task_index;
+                            candidates[1] = pts;
+                            candidates[2] = x;
+                            candidates[3] = y;
+                        }
                     }
                 }
             }
         }
     }
 
-    public void countPointsBorders(int task, int y)
-    {
+    public int countPointsBorders(int task, int y) {
+        int points;
         //System.out.println("Task: " +task+ " (" +x+ "," +y+ ")");
         //System.out.println("Task_size (" +taskList.get(task).getWidth()+ "," +taskList.get(task).getHeight()+ ")");
         //System.out.println("Mesh: " +(mesh.getMeshHeight()-1));
         if (mesh.getMeshHeight() == taskList.get(task).getHeight()) {
-        points[task] = 2*taskList.get(task).getWidth();
+        points = 2*taskList.get(task).getWidth();
         }
         else if (y == 0 || y == mesh.getMeshHeight()-taskList.get(task).getHeight()) {
-        points[task] = taskList.get(task).getWidth();
+        points = taskList.get(task).getWidth();
         }
         else {
-            points[task] = 0;
+            points = 0;
         }
-    }
-
-
-    public void tryToAllocate(Task currentTask) {
-        int x = random.nextInt(mesh.getMeshWidth());
-        int y = random.nextInt(mesh.getMeshHeight());
-        taskList.remove(0);
-       System.out.println("X: " +x+ " Y: "+y);
-
-
-        if (mesh.gridIsFree(x, y, currentTask)) {
-            mesh.allocateTask(x, y, currentTask);
-            timeLapse();
-            allocatedTaskList.add(new AllocatedTask(currentTask, y, x));
-        } else {
-            numberOfFailedAllocations++;
-            taskList.add(currentTask);
-            timeLapse();
-        }
+        return points;
     }
 
     public void timeLapse() {

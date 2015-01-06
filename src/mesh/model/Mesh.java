@@ -1,6 +1,7 @@
 package mesh.model;
 
 
+import mesh.algorithms.BusyList;
 import mesh.providers.MeshProvider;
 
 public class Mesh {
@@ -64,9 +65,10 @@ public class Mesh {
                     return false;
                 } else if ((allocatingTask.getWidth() + startX) > getMeshWidth()) {
                     allocator += grid[j % getMeshWidth()][i];
+                    //System.out.println("grid (" +j+ "," +i+ ")");
                 } else {
                     allocator += grid[j][i];
-
+                    //System.out.println("grid (" +j+ "," +i+ ")");
                 }
             }
         }
@@ -77,13 +79,64 @@ public class Mesh {
             return false;
     }
 
-    public void countPoints(int task, int x, int y) {
-        int counter =0;
-        for (int i=0; y < getMeshHeight(); i++) {
-            for (int j = 0; x < getMeshWidth(); j++) {
+    public int countPoints(int x, int y, int task_number,  Task counting_task) {
+        int points =0;
 
+        int [][] help_grid = new int [getMeshWidth()+1][getMeshHeight()+2];
+
+        for (int row = 0; row < help_grid.length; row++) {
+            for (int col = 0; col < help_grid[row].length; col++) {
+                help_grid[row][col] = 0;
             }
         }
+
+        for (int i=1; i < getMeshHeight()+1; i++) {
+            for (int j = 1; j < getMeshWidth()+1; j++) {
+                help_grid[j][i] = grid[j-1][i-1];
+            }
+        }
+
+        for (int i = 1; i < getMeshHeight()+1; i++) {
+            help_grid[0][i] = help_grid[getMeshWidth()][i];
+        }
+
+        int stopX;
+        int stopY;
+        if (counting_task.getHeight() == getMeshHeight()) {
+             stopY = counting_task.getHeight() + 1;
+        } else {
+             stopY = counting_task.getHeight() + 2;
+        }
+
+        if (counting_task.getWidth() == getMeshWidth()){
+            stopX = counting_task.getWidth() + 1;
+        } else if(x + counting_task.getWidth() == getMeshWidth()) {
+            stopX = counting_task.getWidth() + 3;
+        }else {
+            stopX = counting_task.getWidth() + 2;
+        }
+
+        for (int i = y; i < stopY; i++) {
+            for (int j = x; j < stopX; j++) {
+                if (help_grid[i][j] != (task_number + 1) && help_grid[i][j] != 0) {
+                    points += 1;
+                }
+            }
+        }
+/*
+        System.out.println("");
+        for (int i = 0; i < getMeshHeight()+2; i++) {
+
+            for (int j = 0; j < getMeshWidth()+1; j++) {
+
+                System.out.print(help_grid[j][i] + " ");
+                //System.out.println();
+            }
+            System.out.println();
+        }
+        System.out.println("------------------------");
+*/
+        return points;
     }
 
     public void printArray() {
