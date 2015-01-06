@@ -16,7 +16,6 @@ public class Mesh {
         this.meshWidth = w;
         this.meshHeight = h;
         grid = new int[meshWidth][meshHeight];
-//        grid = new int[meshHeight][meshWidth];
 
         fillArray();
     }
