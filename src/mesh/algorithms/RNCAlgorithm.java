@@ -26,8 +26,6 @@ public class RNCAlgorithm {
 
     public void run() {
         MeshProvider.getMesh().fillArray();
-
-
         while (true) {
 
             Task temporaryTask = taskList.get(0);

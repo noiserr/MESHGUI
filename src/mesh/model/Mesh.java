@@ -16,6 +16,8 @@ public class Mesh {
         this.meshWidth = w;
         this.meshHeight = h;
         grid = new int[meshWidth][meshHeight];
+//        grid = new int[meshHeight][meshWidth];
+
         fillArray();
     }
 
@@ -141,10 +143,11 @@ public class Mesh {
 
     public void printArray() {
         System.out.println("");
-        for (int i = 0; i < grid.length; i++) {
-
-            for (int j = 0; j < grid[i].length; j++) {
-
+        for (int i = 0; i < meshHeight; i++) {
+            for (int j = 0; j < meshWidth; j++) {
+//                System.out.println("grid[i].length: " + grid[i].length);
+//                System.out.println("grid.length"+grid.length);
+//                System.out.println("j: " + j + " i: " + i);
                 System.out.print(grid[j][i] + " ");
                 //System.out.println();
             }
