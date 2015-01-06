@@ -31,9 +31,9 @@ public class BusyList {
 
         while (true) {
             makeCandidates();
-            for (int i=0; i < 4; i++) {
+/*            for (int i=0; i < 4; i++) {
                 System.out.println("Candidates[" +i+ "] = " +candidates[i]);
-            }
+            } */
             if (mesh.gridIsFree(candidates[2], candidates[3], taskList.get(candidates[0]))) {
                 mesh.allocateTask(candidates[2], candidates[3], taskList.get(candidates[0]));
                 timeLapse();
