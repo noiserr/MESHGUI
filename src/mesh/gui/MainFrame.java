@@ -56,6 +56,8 @@ public class MainFrame extends JFrame {
         setVisible(true);
 
         addActionListeners();
+        ImageIcon img = new ImageIcon("src/resources/miro.png");
+        setIconImage(img.getImage());
 
 
         gridWidthSpinner.addComponentListener(new ComponentAdapter() {

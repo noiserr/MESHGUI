@@ -55,6 +55,8 @@ public class AlgorithmsFrame extends JFrame {
         taskLabel.setText("Tasks: " + TaskListProvider.getTaskList().size());
         addActionListeners();
         setContentPane(rootPanel);
+        ImageIcon img = new ImageIcon("src/resources/miro.png");
+        setIconImage(img.getImage());
         setSize(new Dimension(550, 400));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

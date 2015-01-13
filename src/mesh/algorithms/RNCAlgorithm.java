@@ -23,6 +23,7 @@ public class RNCAlgorithm {
     private int passedTime = 0;
     private int numberOfFailedAllocations = 0;
     private int frag =0;
+//    private int firstAllocationTime=0;
 
     public void run() {
         MeshProvider.getMesh().fillArray();
@@ -54,6 +55,7 @@ public class RNCAlgorithm {
 
         if (mesh.gridIsFree(x, y, currentTask)) {
             mesh.allocateTask(x, y, currentTask);
+
             timeLapse();
             allocatedTaskList.add(new AllocatedTask(currentTask, y, x));
         } else {
@@ -97,8 +99,7 @@ public class RNCAlgorithm {
     }
 
     public float getFragmentation(){
-
-        float v = (float) frag/(MeshProvider.getMesh().getMeshWidth() * MeshProvider.getMesh().getMeshHeight() * passedTime);
+        float v = (float) frag/(MeshProvider.getMesh().getMeshWidth() * MeshProvider.getMesh().getMeshHeight() * (passedTime));
         return v;
 
     }
