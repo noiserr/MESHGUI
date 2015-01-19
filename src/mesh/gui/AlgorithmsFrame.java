@@ -27,7 +27,6 @@ public class AlgorithmsFrame extends JFrame {
 
     private JPanel rootPanel;
     private JButton firstFitButton;
-    private JButton wsbaButton;
     private JButton busyListButton;
     private JButton rncButton;
     private JTextArea taskTextArea;
@@ -37,7 +36,7 @@ public class AlgorithmsFrame extends JFrame {
     private JRadioButton timeRadioButton;
     private JRadioButton areaRadioButton;
     private JTextArea outputTextArea;
-    private JButton panicButton;
+    //    private JButton panicButton;
     private JLabel meshWLabel;
     private JLabel taskLabel;
 
@@ -55,6 +54,8 @@ public class AlgorithmsFrame extends JFrame {
         taskLabel.setText("Tasks: " + TaskListProvider.getTaskList().size());
         addActionListeners();
         setContentPane(rootPanel);
+        ImageIcon img = new ImageIcon("src/resources/miro.png");
+        setIconImage(img.getImage());
         setSize(new Dimension(550, 400));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -67,21 +68,22 @@ public class AlgorithmsFrame extends JFrame {
         firstFitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                outputTextArea.append("\n------------");
+                outputTextArea.append("------------");
                 outputTextArea.append("FirstFit Algorithm");
-                outputTextArea.append("------------\n");
+                outputTextArea.append("------------");
                 FirstFitAlgorithm = new FirstFit();
                 long startTime = System.nanoTime();
                 FirstFitAlgorithm.run();
                 long endTime = System.nanoTime();
-                long duration = (endTime - startTime) / 1000000;
+                float duration = (float) ((endTime - startTime) / 1000000.0);
+//                System.out.println(endTime - startTime);
                 outputTextArea.append("\nTime passed: " + FirstFitAlgorithm.getPassedTime());
                 outputTextArea.append("\nFailed allocations: "+ FirstFitAlgorithm.getNumberOfFailedAllocations());
-                outputTextArea.append("\nActual computing time: " + duration + "ms");
+                outputTextArea.append("\nComputing time: " + duration + "ms");
                 outputTextArea.append("\nFragmentation: " + FirstFitAlgorithm.getFragmentation());
                 outputTextArea.append("\n--------------");
                 outputTextArea.append("---------------");
-                outputTextArea.append("---------------");
+                outputTextArea.append("------------------\n");
             }
         });
 
@@ -89,50 +91,52 @@ public class AlgorithmsFrame extends JFrame {
         busyListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                outputTextArea.append("\n------------");
+                outputTextArea.append("------------");
                 outputTextArea.append("BusyList Algorithm");
-                outputTextArea.append("------------\n");
+                outputTextArea.append("----------");
                 BusyListAlgorithm = new BusyList();
                 long startTime = System.nanoTime();
                 BusyListAlgorithm.run();
                 long endTime = System.nanoTime();
-                long duration = (endTime - startTime) / 1000000;
+                float duration = (float) ((endTime - startTime) / 1000000.0);
+//                System.out.println(endTime - startTime);
                 outputTextArea.append("\nTime passed: " + BusyListAlgorithm.getPassedTime());
                 outputTextArea.append("\nFailed allocations: "+ BusyListAlgorithm.getNumberOfFailedAllocations());
-                outputTextArea.append("\nActual computing time: " + duration + "ms");
+                outputTextArea.append("\nComputing time: " + duration + "ms");
                 outputTextArea.append("\nFragmentation: " + BusyListAlgorithm.getFragmentation());
                 outputTextArea.append("\n--------------");
                 outputTextArea.append("---------------");
-                outputTextArea.append("---------------");
+                outputTextArea.append("------------------\n");
             }
         });
 
 
-        wsbaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+//        wsbaButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        });
 
         rncButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                outputTextArea.append("\n------------");
+                outputTextArea.append("--------------");
                 outputTextArea.append("RNC Algorithm");
-                outputTextArea.append("------------\n");
+                outputTextArea.append("--------------");
                 rncAlgorithm = new RNCAlgorithm();
                 long startTime = System.nanoTime();
                 rncAlgorithm.run();
                 long endTime = System.nanoTime();
-                long duration = (endTime - startTime) / 1000000;
+                float duration = (float) ((endTime - startTime) / 1000000.00);
+//                System.out.println(endTime - startTime);
                 outputTextArea.append("\nTime passed: " + rncAlgorithm.getPassedTime());
                 outputTextArea.append("\nFailed allocations: "+ rncAlgorithm.getNumberOfFailedAllocations());
-                outputTextArea.append("\nActual computing time: " + duration + "ms");
+                outputTextArea.append("\nComputing time: " + duration + "ms");
                 outputTextArea.append("\nFragmentation: " + rncAlgorithm.getFragmentation());
                 outputTextArea.append("\n--------------");
-                outputTextArea.append("---------------");
-                outputTextArea.append("---------------");
+                outputTextArea.append("----------------");
+                outputTextArea.append("-----------------\n");
             }
         });
 
@@ -171,11 +175,11 @@ public class AlgorithmsFrame extends JFrame {
             }
         });
 
-        panicButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+//        panicButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//            }
+//        });
 
 
     }
