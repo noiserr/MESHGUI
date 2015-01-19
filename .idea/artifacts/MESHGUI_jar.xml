@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MESHGUI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MESHGUI_jar</output-path>
+    <root id="archive" name="MESHGUI.jar">
+      <element id="module-output" name="MESHGUI" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/de/sciss/weblaf-core/1.28/weblaf-core-1.28.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/thoughtworks/xstream/xstream/1.4.7/xstream-1.4.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/htmlparser/jericho/jericho-html/3.3/jericho-html-3.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/mortennobel/java-image-scaling/0.8.5/java-image-scaling-0.8.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/jhlabs/filters/2.0.235/filters-2.0.235.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.7.7/slf4j-simple-1.7.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/de/sciss/weblaf-ui/1.28/weblaf-ui-1.28.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fifesoft/rsyntaxtextarea/2.5.0/rsyntaxtextarea-2.5.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
