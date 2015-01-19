@@ -113,8 +113,8 @@ public class BusyList {
 
         }
 
-        System.out.println(frag);
-        MeshProvider.getMesh().printArray();
+//        System.out.println(frag);
+//        MeshProvider.getMesh().printArray();
     }
 
     public void findAndRemoveFinished() {

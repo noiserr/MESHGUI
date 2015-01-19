@@ -12,7 +12,7 @@ public class Mesh {
 
 
     public Mesh(int w, int h) {
-        System.out.println("New MESH" + w + " x " + h);
+//        System.out.println("New MESH" + w + " x " + h);
         this.meshWidth = w;
         this.meshHeight = h;
         grid = new int[meshWidth][meshHeight];
@@ -140,20 +140,20 @@ public class Mesh {
         return points;
     }
 
-    public void printArray() {
-        System.out.println("");
-        for (int i = 0; i < meshHeight; i++) {
-            for (int j = 0; j < meshWidth; j++) {
-//                System.out.println("grid[i].length: " + grid[i].length);
-//                System.out.println("grid.length"+grid.length);
-//                System.out.println("j: " + j + " i: " + i);
-                System.out.print(grid[j][i] + " ");
-                //System.out.println();
-            }
-            System.out.println();
-        }
-        System.out.println("------------------------");
-    }
+//    public void printArray() {
+//        System.out.println("");
+//        for (int i = 0; i < meshHeight; i++) {
+//            for (int j = 0; j < meshWidth; j++) {
+////                System.out.println("grid[i].length: " + grid[i].length);
+////                System.out.println("grid.length"+grid.length);
+////                System.out.println("j: " + j + " i: " + i);
+//                System.out.print(grid[j][i] + " ");
+//                //System.out.println();
+//            }
+//            System.out.println();
+//        }
+//        System.out.println("------------------------");
+//    }
 
     public int countFreeNodes() {
 
